@@ -1,4 +1,5 @@
 import pytest
+import numpy as np
 from histpy import Histogram
 
 from cosipy.image_deconvolution import ImageDeconvolutionDataInterfaceBase, DataIF_COSI_DC2, CoordsysConversionMatrix, AllSkyImageModel
@@ -29,6 +30,10 @@ def test_dataIF_COSI_DC2_localCDS_scatt():
 
     data.calc_bkg_model_product("bkg", expectation)
 
+    # the squared T product is only available for the Galactic CDS
+    with pytest.raises(NotImplementedError):
+        data.calc_squared_T_product(expectation)
+
 def test_dataIF_COSI_DC2_galacticCDS():
 
     event_binned_data = Histogram.open(test_data.path / "test_event_histogram_galacticCDS.hdf5").project(["Em", "Phi", "PsiChi"])
@@ -51,3 +56,9 @@ def test_dataIF_COSI_DC2_galacticCDS():
     data.calc_T_product(expectation)
 
     data.calc_bkg_model_product("bkg", expectation)
+
+    # squared T product: sum_i H_i R_ij^2, compared with a direct computation
+    H = Histogram(data.data_axes, contents = np.random.default_rng(0).uniform(size = data.data_axes.nbins))
+    R = np.asarray(precomputed_response.contents) * data.model_axes['lb'].pixarea().value
+    direct = np.einsum('Emp,leEmp->le', H.contents, R**2)
+    assert np.allclose(np.asarray(data.calc_squared_T_product(H).contents), direct, rtol = 1e-6)

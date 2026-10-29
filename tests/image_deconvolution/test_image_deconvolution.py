@@ -66,3 +66,22 @@ def test_image_deconvolution_override_parameter(dataset, model, mask, parameter_
 
     with pytest.raises(ValueError) as e_info:
         image_deconvolution.initialize()
+
+@pytest.mark.parametrize("algorithm, parameter", [
+    ("MREM", {"iteration_max": 2,
+              "wavelet": {"scales": {"value": [10.0, 20.0], "unit": "deg"}, "significance": 1.0, "noise_realizations": 2, "max_iterations_per_scale": 1},
+              "background_normalization_optimization": {"activate": True, "range": {"bkg": [0.9, 1.1]}}}),
+])
+def test_image_deconvolution_mrem(dataset, mask, parameter_filepath, algorithm, parameter):
+
+    image_deconvolution = ImageDeconvolution()
+    image_deconvolution.set_dataset(dataset)
+    image_deconvolution.read_parameterfile(parameter_filepath)
+    image_deconvolution.set_mask(mask)
+
+    image_deconvolution.parameter['deconvolution'] = {"algorithm": algorithm, "parameter": parameter}
+
+    image_deconvolution.initialize()
+    image_deconvolution.run_deconvolution()
+
+    assert len(image_deconvolution.results) == 2

@@ -1,0 +1,46 @@
+author: cosipy tutorial (DC4 511 keV)
+model_definition:
+  class: "AllSkyImage"
+  property:
+    coordinate: "galactic"
+    nside: 16 # must be the nside of the image response (NSIDE_IMAGE in the notebook)
+    scheme: "ring"
+    energy_edges: # must be the same as the response
+      value: [509.0, 513.0]
+      unit: "keV"
+    unit: "cm-2 s-1 sr-1"
+  initialization:
+    algorithm: "flat"
+    parameter:
+      value: [1e-5]
+      unit: "cm-2 s-1 sr-1"
+deconvolution:
+  algorithm: "MREM"
+  parameter:
+    iteration_max: 300
+    minimum_flux:
+        value: 0.0
+        unit: "cm-2 s-1 sr-1"
+    wavelet:
+        scales:
+            value: [4.0, 8.0, 16.0, 32.0, 64.0] # the finest scale is about the angular resolution
+            unit: "deg"
+        significance: 4.0 # fewer than one noise coefficient per plane above threshold
+        noise_realizations: 8
+        max_iterations_per_scale: 40
+        normalization: "fisher"
+        progressive: True
+    acceleration:
+        activate: True
+        accel_factor_max: 10.0
+        max_change: 0.5
+        min_ratio: 0.1
+        line_search: "robust"
+    background_normalization_optimization:
+        activate: False # the released model is used at its own normalisation: a free normalisation is degenerate with very extended emission
+    stopping_criteria:
+        threshold: 0.05
+    save_results:
+        activate: False
+        directory: "./results"
+        only_final_result: True

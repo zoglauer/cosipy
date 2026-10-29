@@ -13,6 +13,7 @@ from .algorithms.RichardsonLucyBasic import RichardsonLucyBasic
 from .algorithms.RichardsonLucy import RichardsonLucy
 from .algorithms.RichardsonLucyAdvanced import RichardsonLucyAdvanced
 from .algorithms.MAP_RichardsonLucy import MAP_RichardsonLucy
+from .algorithms.MREM import MREM
 
 from .exposure_tables.scatt_exposure_table import SpacecraftAttitudeExposureTable
 from .exposure_tables.time_binned_exposure_table import TimeBinnedExposureTable

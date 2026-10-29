@@ -3,6 +3,7 @@ from .RichardsonLucyBasic import RichardsonLucyBasic
 from .RichardsonLucy import RichardsonLucy
 from .RichardsonLucyAdvanced import RichardsonLucyAdvanced
 from .MAP_RichardsonLucy import MAP_RichardsonLucy
+from .MREM import MREM
 from .prior_base import PriorBase
 from .prior_entropy import PriorEntropy
 from .prior_tsv import PriorTSV

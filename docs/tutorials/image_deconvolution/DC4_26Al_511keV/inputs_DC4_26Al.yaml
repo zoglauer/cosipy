@@ -1,0 +1,13 @@
+#----------#
+# Data I/O for the DC4 26Al image-deconvolution tutorial
+data_file: "dc4_mock_dataset_3months_unbinned_data_filtered_with_SAAcut_time_ordered.fits.gz" # not used: the notebook passes the file paths directly
+ori_file: "DC4_final_530km_3_month_with_slew_15sbins_GalacticEarth_SAA.fits"                  # not used: the notebook passes the file paths directly
+unbinned_output: 'hdf5' # format of the cached energy selection
+time_bins: 7979955.0 # one time bin covering the whole 3 months (tmax - tmin)
+energy_bins: [1700., 1755., 1760., 1784., 1805., 1812., 1822., 1885.] # low continuum, (gap), instrumental lines, (gap), 26Al line window (matches the response), (gap), high continuum
+phi_pix_size: 3 # Compton scattering angle bin [deg], matches the response
+nside: 16 # HEALPix nside of PsiChi, matches the response
+scheme: 'ring'
+tmin: 1835487300.0 # start of the DC4 orientation file
+tmax: 1843467255.0 # end of the DC4 orientation file
+#----------#

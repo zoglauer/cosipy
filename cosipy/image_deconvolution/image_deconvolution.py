@@ -15,6 +15,7 @@ from .algorithms.RichardsonLucyBasic import RichardsonLucyBasic
 from .algorithms.RichardsonLucy import RichardsonLucy
 from .algorithms.RichardsonLucyAdvanced import RichardsonLucyAdvanced 
 from .algorithms.MAP_RichardsonLucy import MAP_RichardsonLucy
+from .algorithms.MREM import MREM
 
 class ImageDeconvolution:
     """
@@ -22,7 +23,8 @@ class ImageDeconvolution:
     """
     model_classes = {"AllSkyImage": AllSkyImageModel}
     deconvolution_algorithm_classes = {"RLbasic": RichardsonLucyBasic, "RL": RichardsonLucy,
-                                       "RLadvanced": RichardsonLucyAdvanced, "MAP_RL": MAP_RichardsonLucy}
+                                       "RLadvanced": RichardsonLucyAdvanced, "MAP_RL": MAP_RichardsonLucy,
+                                       "MREM": MREM}
 
     def __init__(self):
         self._dataset = None

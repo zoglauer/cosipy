@@ -44,6 +44,29 @@ response-related functionality:
      (was broken/bit-rotted in DC3 release)
   - miniDC2 format support (unused since DC2)
 
+### New image-deconvolution algorithm: MREM
+
+`MREM` was added to `cosipy.image_deconvolution` (also available in the `ImageDeconvolution`
+parameter file as `algorithm: "MREM"`): the multi-resolution regularized expectation
+maximization of Knoedlseder et al. (1999, A&A 345, 813), used for the COMPTEL 26Al maps.
+  - The correction map is normalised by the square root of the Fisher information (unit
+    variance per pixel), decomposed into isotropic wavelet scales on the sphere and thresholded
+    at `s` times the noise of each scale, which is determined from Poisson realisations of the
+    current model. Scales are admitted progressively from the largest to the smallest, and the
+    thresholded correction is applied with a likelihood line search.
+  - Two safeguards beyond the paper: the step is bounded so that no pixel changes by more than
+    a factor (1 + `max_change`) per iteration, and the update is damped per pixel
+    (`min_ratio`), which prevents single pixels from overshooting and being trapped at zero.
+  - Opt-in `acceleration:line_search: "robust"` (default `"newton"`): the thresholded direction
+    is not always an ascent direction; the robust mode drops the planes with a non-positive
+    directional derivative from such a direction and finds the step by a safeguarded
+    Newton/bisection search.
+  - The Fisher normalisation uses a new optional data-interface method,
+    `calc_squared_T_product` (sum_i H_i R_ij^2), implemented for the Galactic-coordinate CDS of
+    `DataIF_COSI_DC2`, and `DataInterfaceCollection.calc_summed_squared_T_product`. Interfaces
+    without it raise `NotImplementedError`, and MREM falls back to the exposure normalisation.
+  - Defaults are in `image_deconvolution/constants.py` (`DEFAULT_MREM_*`).
+
 ### New wasabi location for development files
 
 To support file format changes in the develop branch that are

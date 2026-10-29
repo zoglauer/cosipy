@@ -165,6 +165,25 @@ class ImageDeconvolutionDataInterfaceBase(ABC):
         """
         raise NotImplementedError
     
+    def calc_squared_T_product(self, dataspace_histogram):
+        r"""
+        Calculate the product of the input histogram with the transpose of the *squared* response,
+        \sum_{i} H_{i} R_{ij}^2. With H_i = 1 / mu_i this is the diagonal of the Fisher information of the
+        pixel fluxes, used by MREM to normalise its correction map. Optional: data interfaces that cannot
+        provide it raise NotImplementedError, and MREM falls back to the exposure normalisation.
+
+        Parameters
+        ----------
+        dataspace_histogram: :py:class:`histpy.Histogram`
+            Its axes must be the same as self.data_axes
+
+        Returns
+        -------
+        :py:class:`histpy.Histogram`
+            The product with self.model_axes
+        """
+        raise NotImplementedError
+
     @abstractmethod
     def calc_bkg_model_product(self, key, dataspace_histogram):
         """

@@ -62,6 +62,7 @@ List of tutorials and contents, as a link to the corresponding Python notebook i
   - Fitting the 511 diffuse emission.
   - Analyze data in the Compton data space with galactic coordinates.
   - Link to a notebook using Scatt binning which shows its advantages/disadvantages.
+  - DC4 26Al (1809 keV) and 511 keV all-sky images with Richardson-Lucy and MREM `(ipynb) <https://github.com/cositools/cosipy/tree/main/docs/tutorials/image_deconvolution/DC4_26Al_511keV/DC4_26Al_511keV_ImageDeconvolution.ipynb>`_
     
 9. Source injector `(ipynb) <https://github.com/cositools/cosipy/tree/main/docs/tutorials/source_injector/Point_source_injector.ipynb>`_
   - Convolve the response, point source model and orientation to obtain the mock data.
@@ -110,6 +111,7 @@ List of tutorials and contents, as a link to the corresponding Python notebook i
    Fitting the spectrum of a GRB (unbinned) <spectral_fits/continuum_fit/grb/example_grb_fit_normalizing_flows.ipynb>
    Extended source model fitting <spectral_fits/extended_source_fit/diffuse_511_spectral_fit.ipynb>
    Image deconvolution <image_deconvolution/511keV-Galactic-ImageDeconvolution.ipynb>
+   Image deconvolution of the DC4 26Al and 511 keV lines (RL, MREM) <image_deconvolution/DC4_26Al_511keV/DC4_26Al_511keV_ImageDeconvolution.ipynb>
    Source injector <source_injector/Point_source_injector.ipynb>
    Continuum Background Estimation <background_estimation/continuum_estimation/BG_estimationNN_example.ipynb>
    Line background estimation <background_estimation/line_background/line_background_estimation_example_notebook.ipynb>

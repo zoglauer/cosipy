@@ -238,6 +238,31 @@ tutorials:
         COSI-SMEX/DC2/Data/Backgrounds/albedo_photons_3months_unbinned_data.fits.gz:
           checksum: 4c125410d8f127d7e12682f008d5651d
 
+# the following tutorial is commented out because it needs a 10.8 GB download, about 37 GB of memory
+# and about 40 minutes for the image responses on the first run
+
+#    imaging_DC4_26Al_511keV:
+#      notebook:
+#        - image_deconvolution/DC4_26Al_511keV/DC4_26Al_511keV_ImageDeconvolution.ipynb
+#      ancillary_files:
+#        - image_deconvolution/DC4_26Al_511keV/inputs_DC4_26Al.yaml
+#        - image_deconvolution/DC4_26Al_511keV/inputs_DC4_511keV.yaml
+#        - image_deconvolution/DC4_26Al_511keV/imagedeconvolution_parfile_DC4_26Al_RL.yml
+#        - image_deconvolution/DC4_26Al_511keV/imagedeconvolution_parfile_DC4_26Al_MREM.yml
+#        - image_deconvolution/DC4_26Al_511keV/imagedeconvolution_parfile_DC4_511keV_RL.yml
+#        - image_deconvolution/DC4_26Al_511keV/imagedeconvolution_parfile_DC4_511keV_MREM.yml
+#      wasabi_files:
+#        COSI-SMEX/DC4/Data/Mock_Dataset/dc4_mock_dataset_3months_unbinned_data_filtered_with_SAAcut_time_ordered.fits.gz:
+#          checksum: 762b7ad849b501ddaa31799ec19d14b9
+#        COSI-SMEX/DC4/Data/Orientation/DC4_final_530km_3_month_with_slew_15sbins_GalacticEarth_SAA.fits:
+#          checksum: ca94ff1d7a73c1f41479aaf598807673
+#        COSI-SMEX/DC4/Data/Responses/Response26Al.o4.e1805_1812.s10036231691364.m1045.filtered.nonsparse.binnedimaging.imagingresponse.h5:
+#          checksum: 4de7c15f95c62698ff139585f5f5cdd1
+#        COSI-SMEX/DC4/Data/Responses/Response511.o4.e509_513.s20881894470591.m2555.filtered.nonsparse.binnedimaging.imagingresponse.h5:
+#          checksum: d15cbd03b2cd3d50f3411cd6b8ee362e
+#        COSI-SMEX/DC4/Data/Backgrounds/gal_DC4_bkg_511_binned_smoothed_fwhm_10.0deg.hdf5:
+#          checksum: 1b437be9b4d9e85a230dfe4f4d2ca67e
+
 # the folowing tutorial is commented out because it takes a really long time to run
 
 #    imaging_511_scatt:

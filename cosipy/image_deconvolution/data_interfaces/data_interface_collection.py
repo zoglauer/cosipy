@@ -165,6 +165,16 @@ class DataInterfaceCollection(Sequence):
                                     for data, hist in zip(self._dataset, dataspace_histogram_list)])
 
     # Exposure map
+    def calc_summed_squared_T_product(self, dataspace_histogram_list: list):
+        """
+        Sum over the dataset of the products with the transpose of the squared response
+        (see :py:meth:`ImageDeconvolutionDataInterfaceBase.calc_squared_T_product`).
+        Raises NotImplementedError if any data interface does not provide it.
+        """
+
+        return self._histogram_sum([data.calc_squared_T_product(hist)
+                                    for data, hist in zip(self._dataset, dataspace_histogram_list)])
+
     def calc_summed_exposure_map(self):
         """
         Calculate a list of exposure maps from the registered dataset.

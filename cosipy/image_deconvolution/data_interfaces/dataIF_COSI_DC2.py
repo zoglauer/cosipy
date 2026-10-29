@@ -306,6 +306,25 @@ class DataIF_COSI_DC2(ImageDeconvolutionDataInterfaceBase):
 
         return Histogram(self.model_axes, contents = tprod, copy_contents = False)
 
+    def calc_squared_T_product(self, dataspace_histogram):
+        r"""
+        \sum_{i} H_{i} R_{ij}^2 (see the base class). Implemented for the Galactic-coordinate CDS
+        (precomputed response without coordsys conversion matrix); the squared response is cached.
+        """
+
+        if self._coordsys_conv_matrix is not None:
+            raise NotImplementedError("calc_squared_T_product is only available for the Galactic CDS (no coordsys conversion matrix).")
+
+        if getattr(self, '_image_response_squared', None) is None:
+            self._image_response_squared = np.square(self._image_response.contents)
+
+        tprod = np.tensordot(dataspace_histogram.contents, self._image_response_squared, axes = ((0,1,2), (2,3,4)))
+        # [Em, Phi, PsiChi] x [NuLambda (lb), Ei, Em, Phi, PsiChi] -> [NuLambda (lb), Ei]
+
+        tprod *= self.model_axes['lb'].pixarea()**2
+
+        return Histogram(self.model_axes, contents = tprod, copy_contents = False)
+
     def calc_bkg_model_product(self, key, dataspace_histogram):
         """
         Calculate the product of the input histogram with the background model.
